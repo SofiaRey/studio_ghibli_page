@@ -1,0 +1,646 @@
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/dmserifdisplay/v10/-nFnOHM81r4j6k0gjAW3mujVU2B2G_Bx0vrx52g.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v24/XRXI3I6Li01BKofiOc5wtlZ2di8HDDshdTQ3iazbXWjgeg.woff)
+    format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v24/XRXI3I6Li01BKofiOc5wtlZ2di8HDGUmdTQ3iazbXWjgeg.woff)
+    format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@keyframes show {
+  from {
+    transform: translate(0, 20px);
+    opacity: 0.2;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes show-opacity {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom {
+  from {transform:scale(0, 0)} 
+  to {transform:scale(1 ,1)}
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Nunito";
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:-webkit-any-link {
+  color: white;
+}
+
+.active {
+  font-weight: 600;
+}
+
+nav {
+  width: -webkit-fill-available;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  padding: 2em;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  animation: show 1s;
+}
+
+nav div {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  transition: 0.3s;
+  margin-left: 2em;
+}
+
+nav a:hover {
+  color: rgb(174, 207, 195);
+}
+
+.input-icon {
+  width: 20em;
+  position: relative;
+}
+
+input {
+  width: 100%;
+  height: 2em;
+  border: none;
+  font-family: "Nunito";
+  padding-left: 2.8em;
+  border-radius: 50px;
+  margin-right: 0.6em;
+  animation: show 1s;
+}
+
+nav i {
+  position: absolute;
+  left: 0.8em;
+  color: rgb(176, 176, 176);
+}
+
+.logo {
+  height: 60px;
+}
+
+header {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.catalog-content {
+  z-index: 2;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.catalog-content > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20em;
+}
+
+.btn {
+  z-index: 2;
+  background-color: rgb(31, 80, 61);
+  border-radius: 5px;
+  transition: 0.3s;
+  border: none;
+  padding: 0.6em 1em;
+  color: white;
+  font-family: "Nunito";
+  animation: show 1s;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: rgb(22, 65, 49);
+}
+
+.btn-lighter {
+  background-color: white;
+  color: rgb(31, 80, 61);
+}
+
+.btn-lighter:hover {
+  background-color: rgb(186, 212, 202);
+}
+
+h1 {
+  font-family: "DM Serif Display";
+  font-size: 5em;
+  margin: 0;
+  animation: show 1s;
+}
+
+h2 {
+  font-family: "DM Serif Display";
+  font-size: 3em;
+  margin: 0;
+  animation: show 1s;
+}
+
+h3 {
+  font-family: "DM Serif Display";
+  font-size: 2em;
+  margin: 0;
+  animation: show 1s;
+}
+
+header h4 {
+  font-size: 2em;
+  margin: 0;
+  animation: show 1s;
+}
+
+header > div > a {
+  position: absolute;
+  bottom: 4em;
+  transition: 0.4s;
+}
+
+header > div > a:hover {
+  bottom: 5em;
+}
+
+.dark-filter {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: linear-gradient(rgba(0, 0, 0, 0) 60%, rgb(31, 80, 61));
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 0.5s;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.index-header .slide img {
+  object-fit: none;
+}
+
+.button {
+  z-index: 2;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  z-index: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+  color: white;
+}
+
+.button:active {
+  transform: scale(1.1);
+}
+
+.button-prev {
+  top: 45%;
+  left: 2%;
+}
+
+.button-next {
+  top: 45%;
+  right: 2%;
+}
+
+.dropdown {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1em;
+  color: white;
+}
+
+.dropdown select {
+  color: rgb(164, 208, 192);
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Nunito";
+  font-size: 1em;
+  padding: 0.3em;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+}
+*/ .dropdown select:focus-visible {
+  outline: none !important;
+}
+
+.card {
+  height: 20em;
+  width: 10em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 1.5em;
+  margin-left: 1.5em;
+  cursor: pointer;
+  padding: 2em;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  background-color: rgb(22, 65, 49);
+}
+
+.card h5 {
+  font-size: 1.2em;
+  font-family: "DM Serif Display";
+  margin: 0;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.card p {
+  text-align: center;
+}
+
+.card img {
+  width: 10em;
+  border-radius: 10px;
+}
+
+.copyright {
+  color: rgb(31, 80, 61);
+  display: flex;
+  justify-content: center;
+  font-size: 0.8em;
+}
+
+.catalog {
+  background-color: rgb(31, 80, 61);
+  padding: 7em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.catalog > div:nth-child(1) {
+  text-align: center;
+  color: white;
+}
+
+#elements {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  justify-content: center;
+}
+
+.not-found {
+  height: 100%;
+  background-image: url("images/chihiro_sad.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  color: white;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not-found h2 {
+  margin: 0;
+  margin-bottom: 1em;
+  animation: show 1s;
+}
+
+.movie {
+  background-color: rgb(31, 80, 61);
+}
+
+.banner-container {
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: contain;
+  background-size: cover;
+}
+
+.movie > img {
+  position: absolute;
+  width: 15em;
+  top: 20em;
+  left: 7em;
+  animation: show 1s;
+  border-radius: 5px;
+}
+
+.content {
+  margin-left: 26em;
+  margin-top: 3em;
+  animation: show 1s;
+  color: white;
+  padding-bottom: 2em;
+}
+
+.description {
+  width: 60%;
+}
+
+.form {
+  background-color: rgb(31, 80, 61);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  margin: 2em;
+  color: white;
+  width: 40%;
+}
+
+form > input {
+  margin-top: 0.4em;
+  padding-left: 1em;
+}
+
+form > .btn {
+  width: 15%;
+  padding: 0;
+}
+
+.form h3,
+.form h4 {
+  animation: show 1s;
+  color: white;
+}
+
+.form h3 {
+  margin-top: 1.5em;
+}
+
+form > label {
+  animation: show 1s;
+}
+
+.input-error {
+  margin: 0;
+  margin-top: 0.4em;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(206, 48, 8);
+}
+
+.checkbox {
+  width: 1.2em !important;
+  background: rgb(22, 65, 49);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.checkbox-container span {
+  color: rgb(186, 212, 202);
+  text-decoration: underline;
+}
+
+.checkbox-container i {
+  margin-left: 5px;
+  padding: 3px 7px;
+  border-radius: 50%;
+  background-color: rgb(186, 212, 202);
+  color: rgb(31, 80, 61);
+  animation: show 1s;
+  cursor: pointer;
+}
+
+.popUp {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  display: none;
+}
+
+.black-background {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  animation: show-opacity 0.3s ease-in-out;
+}
+
+.popUp-container {
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  padding: 2em;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  animation: show-opacity 0.3s;
+}
+
+.popUp > div > div {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 15em;
+  margin-bottom: 2em;
+  animation: show 0.6s;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.slide-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.slide-container audio {
+  margin-top: 2em;
+  animation: show 1s;
+}
+
+.slide-container h1 {
+  text-align: center;
+}
+
+.gallery-section {
+  background-color: rgb(31, 80, 61);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-title {
+  color: white;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.gallery {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  padding-bottom: 3em;
+}
+
+.gallery > div {
+  width: 30%;
+  border-radius: 5px;
+  height: 30vh;
+  overflow: hidden;
+}
+
+.gallery > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s;
+  transform: scale(1.1);
+}
+
+.gallery > div > img:hover {
+  transform: scale(1);
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: none;
+  position: fixed;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.modal-opened-img {
+  width: 60%;
+  position: absolute;
+  border-radius: 5px;
+  z-index: 2;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  animation: show-opacity 0.3s;
+}
+
+.close-btn {
+  top: 1em;
+  right: 3em;
+  font-size: 40px;
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  z-index: 20;
+}
+
+.close-btn:hover {
+  color: rgba(165, 165, 165, 0.6);
+  cursor: pointer;
+}
+
+#elements {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#elements h5 {
+  font-size: 1.2em;
+}

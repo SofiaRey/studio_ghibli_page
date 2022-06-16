@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.webp" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Studio Ghibli</title>
+  </head>
+  <body class="">
+    <nav>
+      <a href="catalog.html">
+        <img src="images/logo.webp" alt="Logo de hoja" class="logo" />
+      </a>
+      <div>
+        <a class="active" href="index.html">Inicio</a>
+        <a href="catalog.html">Películas</a>
+        <a href="404.html">Acerca de</a>
+      </div>
+    </nav>
+    <header class="index-header">
+      <div class="catalog-content">
+        <div>
+          <h4>株式会社スタジオジブリ</h4>
+          <h1>Studio Ghibli</h1>
+          <a href="#form" class="btn">Registrate</a>
+        </div>
+        <a href="#form">
+          <i class="fa fa-chevron-down icon"></i>
+        </a>
+      </div>
+      <div class="dark-filter"></div>
+      <div class="slider">
+      </div>
+    </header>
+    <section class="popUp hidden">
+      <div class="popUp-container">
+          <div>
+              <h3>Términos y Condiciones</h3>
+              <p>
+                Estos son los Términos y Condiciones de Uso de Studio Ghibli, la web
+                accesible desde https://www.studioghibli.com. Studio Ghibli ha sido
+                creada por Studio Ghibli Ltd, una empresa registrada en Japón y Corea
+                con el número de registro 11673580.
+              </p>
+              <h4>En pocas palabras</h4>
+              <p>
+                Lo más probable es que no vaya a leer todos nuestros Términos y
+                Condiciones, a menos que sea un competidor nuestro o un cliente
+                descontento; a los primeros, buena suerte, y a los segundos, póngase
+                en contacto a través del formulario de comentarios de nuestro sitio
+                web y haremos todo lo posible para que se sienta bien. Para el resto
+                de ustedes, pensamos que sería útil desglosarlo de forma sencilla.
+                Nunca venderemos tus datos personales ni compartiremos tu dirección de
+                correo electrónico con terceros, tienes nuestra palabra. Lo que
+                podemos hacer para ganar dinero y mantenernos vivos como negocio es
+                mirar las películas más visitadas para que podamos crear ofertas e
+                incentivos para verlas junto con los cines que las ofrecen. No hay
+                recargos ni tasas adicionales, ya que las comisiones son pagadas por
+                los cines fuera del precio de venta normal, por lo que no hay impacto
+                en usted. Aparte de eso, podemos eliminar o suspender tu cuenta si
+                utilizas Studio Ghibli para algo ilegal o poco ético, pero nos
+                pondremos en contacto contigo antes de hacerlo.
+          </div>
+          <a class="btn" id="closePopUp">Entendido</a>
+        </p>
+      </div>
+      <div class='black-background'></div>
+    </section>
+    <section class="form" id="form">
+      <h3>Ingresa tus datos</h3>
+      <h4>Recibirás mails con todas las novedades</h4>
+      <form action="" >
+        <label for="name"><i class="fa fa-user"></i> Nombre Completo</label
+        ><br />
+        <input type="text" id="name" name="name" placeholder="John Doe" />
+        <p id="error-name" class="input-error"></p>
+        <br />
+        <label for="email"><i class="fa fa-envelope"></i> Email</label><br />
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="john@mail.com"
+        />
+        <p id="error-email" class="input-error"></p>
+        <br />
+        <label for="phone"><i class="fa fa-phone"></i> Celular</label><br />
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          placeholder="099876543"
+        />
+        <p id="error-phone" class="input-error"></p>
+        <br />
+        <div class="checkbox-container">
+          <input
+            class="checkbox"
+            type="checkbox"
+            id="termsNConds"
+            name="termsNConds"
+          />
+          <label for="termsNConds">Acepto los <span>Términos y Condiciones</span></label>
+          <i id="openPopUp" class="fa fa-info"></i><br />
+          
+        </div>
+        <p id="error-checkbox" class="input-error "></p>
+        <br />
+        <input class="btn btn-lighter" type="submit" value="Enviar" id="submit" />
+      </form>
+    </section>
+    <section class="copyright">
+      <p>Copyright © 1999-2022 Studioghibli.com from Studio Ghibli</p>
+    </section>
+    <script type="module" src="index.js"></script>
+    <script type="module" src="data.js"></script>
+  </body>
+</html>

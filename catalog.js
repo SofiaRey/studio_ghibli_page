@@ -1,9 +1,21 @@
 import { data, dataMusic } from "./data.js";
+import {
+  slideForward,
+  slideBackward,
+  pauseCurrentAudio,
+  sortByRate,
+  sortByRealeaseDate,
+  sortByRunningTime,
+  sortByTitle,
+  sortByInput,
+} from "./utils.js";
 
-// TODO: random slider
+renderData(sortByRate(data));
+
+// -------------- Render all the movies --------------
 
 function renderData(array) {
-  document.querySelector("#elements").innerHTML = '';
+  document.querySelector("#elements").innerHTML = "";
   for (let i = 0; i < array.length; i++) {
     document.querySelector("#elements").innerHTML += `
         <a href="movie.html?id=${array[i].id}" class="card">
@@ -13,12 +25,12 @@ function renderData(array) {
       `;
   }
 }
-renderData(sortByRate());
 
-// Slider
+// -------------- Slider --------------
 
+// Generate each slide
 for (let i = 0; i < dataMusic.length; i++) {
-  const slider = document.querySelector('.slider');
+  const slider = document.querySelector(".slider");
   slider.innerHTML += `
   <div class="slide">
     <div class="slide-container">
@@ -28,134 +40,71 @@ for (let i = 0; i < dataMusic.length; i++) {
     </div>
     <div class="dark-filter"></div>
     <img src="${dataMusic[i].background}" alt="" />
-
   </div>
   `;
 }
 
+// Slider slides
 let slides = document.querySelectorAll(".slide");
-const next = document.querySelector(".button-next");
-const prev = document.querySelector(".button-prev");
-const maxSlide = slides.length - 1;
 
+// Current index of slide
+let current = 0;
+
+// Slider button foward action
+document.querySelector(".button-next").addEventListener("click", function () {
+  pauseCurrentAudio(current);
+  current = slideForward(current, slides);
+});
+
+// Slider button backward action
+document.querySelector(".button-prev").addEventListener("click", function () {
+  pauseCurrentAudio(current);
+  current = slideBackward(current, slides);
+});
+
+// Arrange slides
 for (let i = 0; i < slides.length; i++) {
   slides[i].style.transform = `translateX(${i * 100}%)`;
 }
 
-let current = 0;
+// -------------- Filter Movies Dropdown ------------
 
-function forward() {
-  if (current === slides.length - 1) {
-    current = 0;
-  } else {
-    current++;
-  }
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.transform = `translateX(${100 * (i - current)}%)`;
-  }
-}
-
-function backward() {
-  if (current === 0) {
-    current = maxSlide;
-  } else {
-    current--;
-  }
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.transform = `translateX(${100 * (i - current)}%)`;
-  }
-}
-
-function pauseCurrentAudio() {
-  document.querySelector(`audio[data-id="${current}"]`).pause();
-}
-
-next.addEventListener("click", function () {
-  pauseCurrentAudio();
-  forward();
-});
-
-prev.addEventListener("click", function () {
-  pauseCurrentAudio();
-  backward();
-});
-
-// Dropdown
-
-document.querySelector("#movie-filter").addEventListener('change', (event) => {
+// Sort movies based on select option
+document.querySelector("#movie-filter").addEventListener("change", (event) => {
   var selection = event.target.value;
   let moviesOrdered = [];
 
-  if (selection == 'rt_score') {
-    moviesOrdered = sortByRate();
-  } else if (selection == 'release_date') {
-    moviesOrdered = sortByRealeaseDate();
-  } else if (selection == 'running_time') {
-    moviesOrdered = sortByRunningTime();
-  } else if (selection == 'title') {
-    moviesOrdered = sortByTitle();
+  if (selection == "rt_score") {
+    moviesOrdered = sortByRate(data);
+  } else if (selection == "release_date") {
+    moviesOrdered = sortByRealeaseDate(data);
+  } else if (selection == "running_time") {
+    moviesOrdered = sortByRunningTime(data);
+  } else if (selection == "title") {
+    moviesOrdered = sortByTitle(data);
   }
 
   renderData(moviesOrdered);
 });
 
-function sortByRate() {
-  let newArray = data.sort((a, b) => {
-    return a.rt_score > b.rt_score ? -1 : 1;
-  });
-  return newArray;
-}
+// -------------- Search bar --------------
 
-function sortByRealeaseDate() {
-  let newArray = data.sort((a, b) => {
-    return a.release_date > b.release_date ? -1 : 1;
-  });
-  return newArray;
-}
-
-function sortByRunningTime() {
-  let newArray = data.sort((a, b) => {
-    return a.running_time > b.running_time ? -1 : 1;
-  });
-  return newArray;
-}
-
-function sortByTitle() {
-  let newArray = data.sort((a, b) => {
-    return a.title > b.title ? 1 : -1;
-  });
-  return newArray;
-}
-
-// Input
-
-document.querySelector("#search-name").addEventListener('input', (event) => {
+// Sort movies based on search bar
+document.querySelector("#search-name").addEventListener("input", (event) => {
   const selection = event.target.value.trim();
 
-  let moviesOrdered = sortByInput(selection);
+  let moviesOrdered = sortByInput(selection, data);
 
-  if (moviesOrdered.length > 0){
+  if (moviesOrdered.length > 0) {
+    // If there are movies with the searched name, render them
     renderData(moviesOrdered);
   } else {
+    // If not, render empty state
     document.querySelector("#elements").innerHTML = `
         <div class='empty-state'>
           <h1>(^-^*)</h1>
           <h5>No hay resultados</h5>
         </div>
       `;
-    
   }
 });
-
-function sortByInput(text) {
-
-  let newArray = [];
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].title.toLowerCase().includes(text)) {
-      newArray.push(data[i])
-    }
-  }
-  return newArray;
-}

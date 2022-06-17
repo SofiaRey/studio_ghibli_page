@@ -1,36 +1,33 @@
 import { slider } from "./data.js";
+import { openModal, closeModal, slideForward } from "./utils.js";
 
-// Pop Up - Terms and Conditions
+// -------------- Pop Up - Terms and Conditions --------------
 
-document
-  .querySelector("#openPopUp")
-  .addEventListener("click", function openPopUp() {
-    document.querySelector("body").classList.add("no-scroll");
-    document.querySelector(".popUp").style.display = "block";
-  });
+const popUp = document.querySelector(".popUp");
 
-document
-  .querySelector("#closePopUp")
-  .addEventListener("click", function closePopUp() {
-    document.querySelector("body").classList.remove("no-scroll");
-    document.querySelector(".popUp").style.display = "none";
-  });
+// Open pop up on click of info icon
+document.querySelector("#openPopUp").addEventListener("click", function () {
+  openModal(popUp);
+});
 
+// Close pop up on click of info icon
+document.querySelector("#closePopUp").addEventListener("click", function () {
+  closeModal(popUp);
+});
+
+// Close pop up on click of background
 document
   .querySelector(".black-background")
   .addEventListener("click", function () {
-    document.querySelector("body").classList.remove("no-scroll");
-    document.querySelector(".popUp").style.display = "none";
+    closeModal(popUp);
   });
 
-// Slider
+// -------------- Slider --------------
 
 let sliderObject = document.querySelector(".slider");
 
-console.log(slider.length)
-
+// Generate each slide
 for (let i = 0; i < slider.length; i++) {
-  console.log(slider[i])
   sliderObject.innerHTML += `
     <div class="slide">
       <img src="${slider[i]}" alt="" />
@@ -38,43 +35,35 @@ for (let i = 0; i < slider.length; i++) {
   `;
 }
 
+// Slider slides
 let slides = document.querySelectorAll(".slide");
 
-const next = document.querySelector(".button-next");
-const prev = document.querySelector(".button-prev");
-const maxSlide = slides.length - 1;
+// Current index of slide
+let current = 0;
 
+// Arrange slides
 for (let i = 0; i < slides.length; i++) {
   slides[i].style.transform = `translateX(${i * 100}%)`;
 }
 
-let current = 0;
-
-function forward() {
-  if (current === slides.length - 1) {
-    current = 0;
-  } else {
-    current++;
-  }
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.transform = `translateX(${100 * (i - current)}%)`;
-  }
-}
-
+// Autoplay slider
 setInterval(function () {
-  forward();
+  current = slideForward(current, slides);
 }, 3000);
 
-// Form validation
+// -------------- Form validation --------------
 
+// Entire form
+let form = document.querySelector("form");
+
+// Define each input
 let completeName = document.querySelector("#name");
 let email = document.querySelector("#email");
 let phone = document.querySelector("#phone");
 let checkbox = document.querySelector("#termsNConds");
-let submit = document.querySelector("#submit");
-let form = document.querySelector("form");
-let isInvalid = false;
+
+// Form does not have invalid inputs
+let isValid = true;
 
 completeName.addEventListener("keyup", validateName);
 email.addEventListener("keyup", validateEmail);
@@ -83,63 +72,71 @@ form.addEventListener("submit", validateForm);
 
 function validateName() {
   let error = document.querySelector("#error-name");
+  isValid = false;
 
   if (completeName.value.length == 0) {
     error.innerHTML = "Complete el campo";
   } else if (completeName.value.length < 4) {
     error.innerHTML = "El nombre debe contener mínimo 4 letras";
   } else {
-    isInvalid = false;
+    isValid = true;
     error.innerHTML = "";
   }
+
+  return isValid;
 }
 
 function validateEmail() {
   let error = document.querySelector("#error-email");
+  isValid = false;
 
   if (email.value.length == 0) {
-    isInvalid = true;
     error.innerHTML = "Complete el campo";
   } else if (!email.value.includes("@") || !email.value.includes(".com")) {
-    isInvalid = true;
     error.innerHTML = "Formato de email inválido";
   } else {
-    isInvalid = false;
+    isValid = true;
     error.innerHTML = "";
   }
+
+  return isValid;
 }
 
 function validatePhone() {
   let error = document.querySelector("#error-phone");
+  isValid = false;
 
   if (phone.value.length == 0) {
-    isInvalid = true;
     error.innerHTML = "Complete el campo";
   } else if (
     phone.value.length != 9 ||
     !phone.value.startsWith("09") ||
     isNaN(phone.value)
   ) {
-    isInvalid = true;
     error.innerHTML = "Formato de número telefónico inválido";
   } else {
-    isInvalid = false;
+    isValid = true;
     error.innerHTML = "";
   }
+
+  return isValid;
 }
 
 function validateForm(event) {
   let error = document.querySelector("#error-checkbox");
+  isValid = false;
 
   event.preventDefault();
-  if (!checkbox.checked) {
-    isInvalid = true;
+
+  if (!validateName() || !validateEmail() || !validatePhone()) {
+    isValid = false;
+  } else if (!checkbox.checked) {
     error.innerHTML = "Debe aceptar los Términos y Condiciones";
   } else {
-    isInvalid = false;
+    isValid = true;
     error.innerHTML = "";
   }
-  if (!isInvalid) {
+  if (isValid) {
     completeName.value = "";
     email.value = "";
     phone.value = "";

@@ -1,8 +1,14 @@
 import { data } from "./data.js";
+import { openModal, closeModal } from "./utils.js";
 
+// Get movie id from query params
 const route = window.location.search;
 const id = parseInt(new URLSearchParams(route).get("id"));
+
+// Movie to render
 const movie = data[id];
+
+// -------------- Load movie dynamic information --------------
 
 document.querySelector("title").innerHTML = movie.title;
 document.querySelector(
@@ -24,7 +30,7 @@ document.querySelector(
   "#duration"
 ).innerHTML += `${movie.running_time} minutos`;
 
-// If there are character available, render them
+// If there are characters available, render them
 if (movie.people.length != 0) {
   document.querySelector(
     ".characters"
@@ -45,46 +51,38 @@ for (let i = 0; i < movie.gallery.length; i++) {
         </div>`;
 }
 
-// Gallery Image - Modal
+// -------------- Gallery Modal --------------
 
-// Get each gallery image
+// Get all gallery images
 let images = document.getElementsByClassName("gallery-img-container");
+
+// Get all empty modal
 const modal = document.querySelector("#modal");
 
 // Add event listener for each image to open modal and close it
 for (var i = 0; i < images.length; i++) {
   var img = images[i];
 
-  console.log(images[i]);
   img.addEventListener("click", function (e) {
-    
-    openModal(e);
-
-    document
-      .querySelector(".black-background")
-      .addEventListener("click", function () {
-        closeModal();
-      });
-
-    document
-      .querySelector("#close-btn")
-      .addEventListener("click", function () {
-        closeModal();
-      });
-  });
-}
-
-function openModal(e) {
-  document.querySelector("body").classList.add("no-scroll");
-  modal.style.display = "block";
-  modal.innerHTML = `
+    // Open modal
+    openModal(modal);
+    // Generate modal image
+    modal.innerHTML = `
         <i class="fa fa-close close-btn" id="close-btn"></i>
         <img class='modal-opened-img' src='${e.target.attributes.src.nodeValue}'/>
         <div class='black-background'></div>
         `;
-}
 
-function closeModal() {
-  document.querySelector("body").classList.remove("no-scroll");
-  modal.style.display = "none";
+    // Close modal on click of background
+    document
+      .querySelector(".black-background")
+      .addEventListener("click", function () {
+        closeModal(modal);
+      });
+
+    // Close modal on click of close button
+    document.querySelector("#close-btn").addEventListener("click", function () {
+      closeModal(modal);
+    });
+  });
 }
